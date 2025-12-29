@@ -1,11 +1,9 @@
 ﻿
 using System;
-using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Tls;
 using TMPro;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
 
 namespace AngryLabs.Props.BallDrop
 {
@@ -21,22 +19,39 @@ namespace AngryLabs.Props.BallDrop
 
         public TMP_Text TextObject;
 
+        [UdonSynced]
         public int add_seconds;
+
+        [UdonSynced]
         public int add_days;
 
         public BallDropLogic ballDropLogic;
         //public TimeZoneDisplay timeZoneDisplay;
         public DisplayNextTimeZone displayNextTimeZone;
+        private int _lastState;
+
 
         public void Start()
         {
+            DateTime dt = Networking.GetNetworkDateTime();
+            dt = dt.AddSeconds(add_seconds).AddDays(add_days);
+
             SendCustomEventDelayedSeconds(nameof(Tick), 1.0f);
+            displayNextTimeZone.Tick(dt);
+
+            _lastState = GetStateHash();
+        }
+
+        private int GetStateHash()
+        {
+            return add_seconds.GetHashCode() ^ add_days.GetHashCode();
         }
 
         public void Tick()
         {
             DateTime dt = Networking.GetNetworkDateTime();
             dt = dt.AddSeconds(add_seconds).AddDays(add_days);
+            int newHash = GetStateHash();
 
             DateTime nextHour = new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, 0, 0, DateTimeKind.Utc)
                 .AddHours(1);
@@ -51,9 +66,12 @@ namespace AngryLabs.Props.BallDrop
                 ballDropLogic.Trigger();
             }
 
-            if(seconds == 0 && minutes != 0 && displayNextTimeZone != null)
+            bool timeReady = seconds == 0 && minutes != 0 && displayNextTimeZone != null;
+            if(timeReady || _lastState != newHash)
             {
+                _lastState = newHash;
                 displayNextTimeZone.Tick(dt);
+                RequestSerialization(); 
             }
 
             if(TextObject == null)
@@ -73,6 +91,7 @@ namespace AngryLabs.Props.BallDrop
                 string formated = minutes == 0 ? $"{seconds}": $"{minutes:00}:{seconds:00}";
                 TextObject.text = formated;
             }
+
             SendCustomEventDelayedSeconds(nameof(Tick), 1.0f);
         }
 
