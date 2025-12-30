@@ -323,21 +323,41 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 848546442812514846, guid: c1a1158320ec7714686c169c252bf0fc,
         type: 3}
+    - target: {fileID: 1056969570176310517, guid: c1a1158320ec7714686c169c252bf0fc,
+        type: 3}
+      propertyPath: m_text
+      value: Moscow, Istanbul, Bagdad, Kuwait City
+      objectReference: {fileID: 0}
+    - target: {fileID: 1056969570176310517, guid: c1a1158320ec7714686c169c252bf0fc,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 1056969570176310517, guid: c1a1158320ec7714686c169c252bf0fc,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1489528716106622622, guid: c1a1158320ec7714686c169c252bf0fc,
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 1489528716106622622, guid: c1a1158320ec7714686c169c252bf0fc,
         type: 3}
+    - target: {fileID: 1604346173342825541, guid: c1a1158320ec7714686c169c252bf0fc,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 1604346173342825541, guid: c1a1158320ec7714686c169c252bf0fc,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3276339885328225302, guid: c1a1158320ec7714686c169c252bf0fc,
         type: 3}
       propertyPath: m_Name
       value: ball-drop
-      objectReference: {fileID: 0}
-    - target: {fileID: 4517406914200833332, guid: c1a1158320ec7714686c169c252bf0fc,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 6.27
       objectReference: {fileID: 0}
     - target: {fileID: 6104681987700258416, guid: c1a1158320ec7714686c169c252bf0fc,
         type: 3}
